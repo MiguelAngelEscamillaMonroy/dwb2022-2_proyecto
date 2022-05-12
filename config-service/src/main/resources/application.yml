@@ -8,7 +8,7 @@ spring:
         git:
           uri: https://github.com/MiguelAngelEscamillaMonroy/dwb2022-2_proyecto.git
           search-paths: config-data
-          default-label: "main"
+          default-label: "feature/invoice-service"
           
   security:
     user:
