@@ -11,4 +11,5 @@ public class DtoCustomer {
 	public void setRfc(String rfc) {
 		this.rfc = rfc;
 	}
+	
 }
