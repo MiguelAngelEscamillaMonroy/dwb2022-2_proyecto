@@ -48,7 +48,7 @@ public class SvcCartImp implements SvcCart {
 		}
 		
 		Integer product_stock = producto.getStock(); 
-		if(cart.getQuantity() > product_stock || cart.getQuantity() == 0) {
+		if(cart.getQuantity() > product_stock || cart.getQuantity() <= 0) {
 			throw new ApiException(HttpStatus.BAD_REQUEST, "invalid quantity");
 		}
 		
@@ -56,6 +56,31 @@ public class SvcCartImp implements SvcCart {
 		 * Sprint 2 - Requerimiento 3
 		 * Validar si el producto ya había sido agregado al carrito para solo actualizar su cantidad
 		 */
+		/*
+		List<Cart> carrito = getCart(cart.getRfc());
+		for (Cart articulo : carrito) {
+			if (articulo.getGtin().equals(cart.getGtin())) {
+				Integer nueva_cantidad = articulo.getQuantity() + cart.getQuantity();
+				if (nueva_cantidad > product_stock) {
+					throw new ApiException(HttpStatus.BAD_REQUEST, "invalid quantity");
+				}
+				
+				repo.updateProductQuantity(articulo.getCart_id(), nueva_cantidad);
+				return new ApiResponse("quantity updated");
+			}
+		}
+		*/
+		
+		Cart articulo = repo.findByRfcAndGtinAndStatus(cart.getRfc(), cart.getGtin(), 1);
+		if (articulo != null) {
+			Integer nueva_cantidad = articulo.getQuantity() + cart.getQuantity();
+			if (nueva_cantidad > product_stock) {
+				throw new ApiException(HttpStatus.BAD_REQUEST, "invalid quantity");
+			}
+			
+			repo.updateProductQuantity(articulo.getCart_id(), nueva_cantidad);
+			return new ApiResponse("quantity updated");
+		}
 		
 		cart.setStatus(1);
 		repo.save(cart);
