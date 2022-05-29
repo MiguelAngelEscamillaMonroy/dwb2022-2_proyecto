@@ -1,6 +1,7 @@
 package com.product.api.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.product.api.dto.ApiResponse;
 import com.product.api.dto.DtoProductList;
@@ -16,5 +17,6 @@ public interface SvcProduct {
 	public ApiResponse deleteProduct(Integer id);
 	
 	public ApiResponse updateProductCategory(Category category, Integer id);
+	public ApiResponse updateProductStock(Map<String, Integer> productos);
 	
 }

@@ -1,6 +1,7 @@
 package com.product.api.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -105,6 +106,18 @@ public class SvcProductImp implements SvcProduct {
 			throw new ApiException(HttpStatus.NOT_FOUND, "category not found");
 		}
 		*/
+	}
+	
+	@Override
+	public ApiResponse updateProductStock(Map<String, Integer> productos) {
+		for (Map.Entry<String, Integer> producto : productos.entrySet()) {
+			if (repo.updateProductStock(producto.getKey(), producto.getValue()) == 0) {
+				throw new ApiException(HttpStatus.BAD_REQUEST, 
+						String.format("stock for %s cannot be updated", producto.getKey()));
+			}			
+		}
+		
+		return new ApiResponse("product stock updated");
 	}
 
 }

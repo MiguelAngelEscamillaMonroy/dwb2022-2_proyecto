@@ -1,6 +1,7 @@
 package com.product.api.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -63,5 +64,10 @@ public class CtrlProduct {
 	@PutMapping("/{product_id}/category")
 	public ResponseEntity<ApiResponse> updateProductCategory(@PathVariable("product_id") Integer product_id, @RequestBody Category in) {
 		return new ResponseEntity<>(svc.updateProductCategory(in, product_id), HttpStatus.OK);
+	}
+	
+	@PutMapping("/stock")
+	public ResponseEntity<ApiResponse> updateProductStock(@RequestBody Map<String, Integer> productos) {
+		return new ResponseEntity<>(svc.updateProductStock(productos), HttpStatus.OK);
 	}
 }
