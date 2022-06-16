@@ -7,12 +7,20 @@ package com.invoice.api.dto;
 public class DtoProduct {
 	
 	private String gtin;
+	private Double price;
 	private Integer stock;
+	
 	public String getGtin() {
 		return gtin;
 	}
 	public void setGtin(String gtin) {
 		this.gtin = gtin;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 	public Integer getStock() {
 		return stock;

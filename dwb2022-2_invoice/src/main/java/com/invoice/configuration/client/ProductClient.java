@@ -1,10 +1,15 @@
 package com.invoice.configuration.client;
 
+import java.util.Map;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.invoice.api.dto.ApiResponse;
 import com.invoice.api.dto.DtoProduct;
 
 /*
@@ -21,5 +26,7 @@ public interface ProductClient {
 	
 	@GetMapping("product/{gtin}")
 	public ResponseEntity<DtoProduct> getProduct(@PathVariable("gtin") String gtin);
-
+	
+	@PutMapping("product/stock")
+	public ResponseEntity<ApiResponse> updateProductStock(@RequestBody Map<String, Integer> productos);
 }
