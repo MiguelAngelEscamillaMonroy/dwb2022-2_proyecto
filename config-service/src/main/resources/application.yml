@@ -1,16 +1,16 @@
 server:
   port: 8888
-
+  
 spring:
   cloud:
     config:
-      server:
+      server: 
         git:
           uri: https://github.com/MiguelAngelEscamillaMonroy/dwb2022-2_proyecto.git
           search-paths: config-data
-          default-label: "main"
+          default-label: "develop"
           
   security:
     user:
       name: root
-      password: adminadmin 
+      password: adminadmin
